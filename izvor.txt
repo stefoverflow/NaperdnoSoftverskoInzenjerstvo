@@ -1,5 +1,6 @@
 https://vtsnis.edu.rs/wp-content/plugins/vts-predmeti/uploads/2020_Praktikum_V1.pdf
 
+https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/
 
 https://expressjs.com/en/starter/installing.html
 https://expressjs.com/en/starter/generator.html
