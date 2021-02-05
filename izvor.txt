@@ -1,5 +1,11 @@
 https://vtsnis.edu.rs/wp-content/plugins/vts-predmeti/uploads/2020_Praktikum_V1.pdf
 
+dodati: 
+-ejs i jade templetski jezici, ima lepa slika za troslojnu arhitekturu, lab vezba 7
+-mvc model isto moz se ubacu u oblast template engine i da se prica tu malo
+-lab vezba 8, da se vidi ako se moz nesto ubaci jos da se prica da se dopuni vreme
+-testiranje aplikacije moze cela nova oblast fino fino, lab vezba 11
+
 https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/
 
 https://expressjs.com/en/starter/installing.html
@@ -9,3 +15,5 @@ https://expressjs.com/en/starter/static-files.html
 https://expressjs.com/en/guide/writing-middleware.html
 https://expressjs.com/en/guide/using-middleware.html
 https://expressjs.com/en/guide/using-template-engines.html
+
+
