@@ -1,0 +1,41 @@
+html
+  head
+    link(rel='stylesheet', href='style.css')
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    title= title
+  body
+    h1= heading
+    a.bigfont(href="/recipes/add") Add new recipe now!
+    hr
+    for recipe in recipes 
+      p
+        a.bigfont(href="/recipes/"+recipe.name)= recipe.name
+        div 
+          b Description: 
+          span= recipe.description
+        div 
+          b List of ingredients:
+          ul
+          for ingredient in recipe.ingredients
+            li= ingredient
+        div 
+          b Prep time (in minutes): 
+          span= recipe.prep
+        div 
+          b Cook time (in minutes): 
+          span= recipe.cook
+        div 
+          b Total (in minutes): 
+          span= recipe.total
+        div 
+          b Number of servings: 
+          span= recipe.servings
+        div 
+          b Preparation steps: 
+          ol 
+          for step in recipe.steps
+            li= step
+        hr
+
+    
