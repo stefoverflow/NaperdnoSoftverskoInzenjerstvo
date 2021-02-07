@@ -1,5 +1,6 @@
 const express = require("express");
 let recipes = require("../models/Recipes");
+const uuid = require("uuid");
 
 const router = express.Router();
 
@@ -21,12 +22,13 @@ router.get("/add", function (req, res) {
 
 router.get("/:id", function (req, res) {
   const { id } = req.params;
-  const found = recipes.indexOf((recipe) => recipe.id === id);
+  const found = recipes.find((recipe) => recipe.id === id);
+
   if (found) {
     res.render("recipe", {
       title: "BestRecipesWarld",
       heading: req.params.name,
-      recipe: recipes[id],
+      recipe: found,
     });
   } else {
     res.status(400).json({ msg: `No recipe with id: ${req.params.id}` });
@@ -36,7 +38,7 @@ router.get("/:id", function (req, res) {
 router.post("/", function (req, res) {
   const newRecipe = {
     ...req.body,
-    id: recipes.length,
+    id: uuid.v4(),
     total: Number.parseInt(req.body.prep) + Number.parseInt(req.body.cook),
   };
 
@@ -48,10 +50,12 @@ router.post("/edit/:id", function (req, res) {
   const { id } = req.params;
   const updatedRecipe = { ...req.body, id };
 
-  const found = recipes.indexOf((recipe) => recipe.id === id);
+  const found = recipes.find((recipe) => recipe.id === id);
+
   if (found) {
-    recipes[id] = { ...updatedRecipe };
-    console.log("recipes", recipes);
+    const index = recipes.indexOf(found);
+
+    recipes[index] = { ...updatedRecipe };
     res.redirect("/recipes");
   } else {
     res.status(400).json({ msg: `No recipes with the given id: ${id}` });
@@ -88,7 +92,7 @@ router.post("/edit/:id", function (req, res) {
 // });
 
 router.delete("/:id", function (req, res) {
-  const id = Number.parseInt(req.params.id);
+  const { id } = req.params;
   recipes = recipes.filter((recipe) => recipe.id !== id);
   res.redirect("/recipes");
 });
