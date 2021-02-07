@@ -1,40 +1,46 @@
-html
-  head
-    link(rel='stylesheet', href='style.css')
-    meta(charset="utf-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
-    title= title
-  body
-    h1= recipe.name
-    hr
-    div 
-        b Description: 
-        span= recipe.description
-    div 
-        b List of ingredients:
-        ul
-        for ingredient in recipe.ingredients
-            li= ingredient
-    div 
-        b Prep time (in minutes): 
-        span= recipe.prep
-    div 
-        b Cook time (in minutes): 
-        span= recipe.cook
-    div 
-        b Total (in minutes): 
-        span= recipe.total
-    div 
-        b Number of servings: 
-        span= recipe.servings
-    div 
-        b Preparation steps: 
-        ol 
-        for step in recipe.steps
-            li= step
-    hr
+extends layout
 
-    a.bigfont(href="/recipes/add") Edit the recipe.
-    br
-    form(action='./recipes/'+recipe.name, method='delete')
-        input(type='submit', value='Delete this recipe') 
+block content
+  if recipe
+    form(action=`/recipes/edit/${recipe.id}`,method="post")
+      .form-group
+        label(for='name') Recipe name
+        input#name.form-control(name="name" type='text' placeholder='Enter name' value=recipe.name)
+      .form-group
+        label(for='description') Description
+        input#description.form-control(name="description" type='text' placeholder='Enter description' value=recipe.description)
+      .form-group
+        label(for='ingredients') Ingredients
+        textarea#ingredients.form-control(name="ingredients" type='text' placeholder='Enter ingredients' value=recipe.ingredients)=recipe.ingredients
+      .form-group
+        label(for='prep') Preparation time
+        input#prep.form-control(name="prep" type='number' placeholder='Enter preparation time' value=recipe.prep)
+      .form-group
+        label(for='cook') Cooking time
+        input#cook.form-control(name="cook" type='number' placeholder='Enter cooking time' value=recipe.cook)
+      .form-group
+        label(for='steps') Steps
+        textarea#steps.form-control(name="steps" type='text' placeholder='Enter cooking steps' value=recipe.steps)=recipe.steps
+      button.btn.btn-primary(type='submit') Update
+
+  if !recipe
+    form(action="/recipes",method="post")
+      .form-group
+        label(for='name') Recipe name
+        input#name.form-control(name="name" type='text' placeholder='Enter name')
+      .form-group
+        label(for='description') Description
+        input#description.form-control(name="description" type='text' placeholder='Enter description')
+      .form-group
+        label(for='ingredients') Ingredients
+        textarea#ingredients.form-control(name="ingredients" type='text' placeholder='Enter ingredients')
+      .form-group
+        label(for='prep') Preparation time
+        input#prep.form-control(name="prep" type='number' placeholder='Enter preparation time')
+      .form-group
+        label(for='cook') Cooking time
+        input#cook.form-control(name="cook" type='number' placeholder='Enter cooking time')
+      .form-group
+        label(for='steps') Steps
+        textarea#steps.form-control(name="steps" type='text' placeholder='Enter cooking steps')
+      button.btn.btn-primary(type='submit') Add recipe

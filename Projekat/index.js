@@ -1,23 +1,23 @@
-const express = require('express');
-const path = require('path'); 
+const express = require("express");
+const path = require("path");
 
-const logger = require('./middleware/logger');
+const indexRouter = require("./routes/index");
+const recipesRouter = require("./routes/recipes");
+
+const logger = require("./middleware/logger");
 
 const app = express();
-app.use(express.static(path.join(__dirname, 'static'))); 
+app.use(express.static(path.join(__dirname, "static")));
 
 app.use(logger);
-app.engine('pug', require('pug').__express)
-app.set('view engine', 'pug')
+app.engine("pug", require("pug").__express);
+app.set("view engine", "pug");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/recipes', require('./routes/recipes'))
-
-app.get('/', function (req, res) {
-    res.render('index', { title: 'BestRecipesWarld', heading: 'Welcome! Here you will find all the best recipes in the warld.' })
-  });
+app.use("/", indexRouter);
+app.use("/recipes", recipesRouter);
 
 const port = process.env.PORT || 5000;
 
